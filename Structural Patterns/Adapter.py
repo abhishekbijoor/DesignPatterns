@@ -1,12 +1,13 @@
 # 🔹 Imagine you have a USB keyboard (send_keystrokes()) but need to make it work with a Bluetooth device (transmit_data()).
 # 🔹 Implement an Adapter to make them compatible.
+from abc import ABC,abstractmethod
 
 class USBKeyBoard:
-    alphabets = []
     def __init__(self,type,language):
         print(f"class name : {__name__}")
         self.type = type
         self.language = language
+        self.alphabets = []
     
     def send_keystrokes(self, alphabet):
         self.alphabets.append(alphabet)
@@ -17,7 +18,8 @@ class BluetoothDevice:
         pass
 
 class BluetoothAdapter(BluetoothDevice):
-    def __init__(self,usbdevice):
+    def __init__(self,usbdevice:USBKeyBoard):
+        super().__init__()
         self.usbdevice = usbdevice
 
     def transmit_data(self, data):
